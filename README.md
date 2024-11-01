@@ -1,2 +1,2 @@
-# movie_rec_system
-Movie Recommendation System
+# Movie Recommendation System
+This project is a movie recommendation system. The datset used is Kaggle.com's 'The Movies Dataset'
