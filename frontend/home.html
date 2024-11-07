@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommender</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Movie Recommender</h1>
+    </header>
+    <main>
+        <section class="category">
+            <h2>Similar to Movies You've Rated</h2>
+            <div class="movie-list">
+                <div class="movie-card" onclick="showMovieDetails('movie1')">
+                    <img src="movie1.jpg" alt="Movie 1">
+                    <p>Movie 1</p>
+                </div>
+                <div class="movie-card" onclick="showMovieDetails('movie2')">
+                    <img src="movie2.jpg" alt="Movie 2">
+                    <p>Movie 2</p>
+                </div>
+                <!-- Add more movie cards as needed -->
+            </div>
+        </section>
+
+        <section class="category">
+            <h2>Genres You Like</h2>
+            <div class="movie-list">
+                <div class="movie-card" onclick="showMovieDetails('movie3')">
+                    <img src="movie3.jpg" alt="Movie 3">
+                    <p>Movie 3</p>
+                </div>
+                <!-- Add more movie cards as needed -->
+            </div>
+        </section>
+
+        <section class="category">
+            <h2>Your Fav Actors</h2>
+            <div class="movie-list">
+                <div class="movie-card" onclick="showMovieDetails('movie4')">
+                    <img src="movie4.jpg" alt="Movie 4">
+                    <p>Movie 4</p>
+                </div>
+                <!-- Add more movie cards as needed -->
+            </div>
+        </section>
+
+        <section class="category">
+            <h2>You Might Like these Plots</h2>
+            <div class="movie-list">
+                <div class="movie-card" onclick="showMovieDetails('movie5')">
+                    <img src="movie5.jpg" alt="Movie 5">
+                    <p>Movie 5</p>
+                </div>
+                <!-- Add more movie cards as needed -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal for movie details -->
+    <div id="movie-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3 id="movie-title">Movie Title</h3>
+            <p id="movie-description">Description of the movie goes here...</p>
+            <label for="rating">Rate this movie:</label>
+            <select id="rating">
+                <option value="1">1 Star</option>
+                <option value="2">2 Stars</option>
+                <option value="3">3 Stars</option>
+                <option value="4">4 Stars</option>
+                <option value="5">5 Stars</option>
+            </select>
+            <button onclick="submitRating()">Submit Rating</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
