@@ -5,17 +5,15 @@ import numpy as np
 import ast
 import json
 
-#movies_df = pd.read_csv('../dataset/movies.csv', low_memory=False)
+movies_df = pd.read_csv('../dataset/movies.csv', low_memory=False)
 ratings_df = pd.read_csv('../dataset/ratings.csv', low_memory=False)
 
-#movies_df = movies_df.fillna(0, inplace=True)
+movies_df = movies_df.fillna(0, inplace=False)
 ratings_df = ratings_df.fillna(0, inplace=False)
-
-print(ratings_df)
 
 # Ratings-Based Recommendation
 # Load and prepare data
-'''if ratings_df.size > 0:
+if ratings_df.size > 0:
     reader = Reader(rating_scale=(ratings_df['rating'].min(), ratings_df['rating'].max()))
     data = Dataset.load_from_df(ratings_df[['userId', 'movieId', 'rating']], reader)
 
@@ -28,7 +26,7 @@ print(ratings_df)
     predictions = svd.test(testset)
 
 def predict():
-    user_id = 0
+    user_id = 'hamell'
     num_recommendations = 5
     top_recommendations = []
 
@@ -50,22 +48,22 @@ def predict():
             # Retrieve title
             movie = movies_df[movies_df['id'] == movie_id]
             title = movies_df[movies_df['id'] == movie_id]['name']
-            poster = posters_df[posters_df['id'] == movie_id]['link']
+            #poster = posters_df[posters_df['id'] == movie_id]['link']
             #genre = movies_df[genres_df['id'] == movie_id]['genre']
             
             # Check if the title exists and is not empty
             if not title.empty:
                 json_obj = movie.to_dict(orient='records')
-                json_obj[0]['poster'] = poster.values[0]
+                #json_obj[0]['poster'] = poster.values[0]
                 top_recommendations.append(json_obj)
             
             # Stop once we have 5 valid recommendations
             if len(top_recommendations) == num_recommendations:
                 break
-        print(top_recommendations[0])
         return json.dumps(top_recommendations)
     else:
+        print("No ratings available")
         top_recommendations = movies_df.sample(n=num_recommendations).values.tolist()
         return json.dumps(top_recommendations)
     
-print(predict())'''
+print(predict())
