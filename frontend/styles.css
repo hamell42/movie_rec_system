@@ -1,3 +1,4 @@
+/* General styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -6,57 +7,65 @@ body {
 }
 
 header {
-    background-color: #1f1f1f;
-    padding: 20px;
     text-align: center;
+    padding: 20px;
+    background-color: #1f1f1f;
 }
 
-h1 {
+header h1 {
+    color: #e50914;
+    font-size: 2rem;
     margin: 0;
 }
 
-main {
-    padding: 20px;
-}
-
+/* Category section */
 .category {
-    margin-bottom: 30px;
+    margin: 20px;
 }
 
-h2 {
-    margin-bottom: 15px;
-    font-size: 1.5em;
-    border-bottom: 2px solid #e50914;
-    display: inline-block;
+.category h2 {
+    margin-left: 10px;
+    font-size: 1.5rem;
+    color: #e50914;
 }
 
+/* Movie list container */
 .movie-list {
-    display: flex;
-    gap: 15px;
-    overflow-x: auto;
-    padding-bottom: 10px;
+    display: flex; /* Arrange movies in a row */
+    flex-wrap: wrap; /* Wrap to the next row if necessary */
+    gap: 20px; /* Space between movie cards */
+    justify-content: flex-start; /* Align to the left */
+    padding: 10px;
 }
 
+/* Movie cards */
 .movie-card {
-    flex: 0 0 auto;
-    width: 150px;
+    background-color: #1f1f1f;
+    border-radius: 10px;
     text-align: center;
+    padding: 10px;
+    width: 150px; /* Set a fixed width */
+    flex: 0 0 auto; /* Prevent cards from stretching */
+    transition: transform 0.3s ease, background-color 0.3s ease;
     cursor: pointer;
+}
+
+.movie-card:hover {
+    transform: scale(1.1);
+    background-color: #333;
 }
 
 .movie-card img {
     width: 100%;
-    border-radius: 8px;
-    transition: transform 0.3s ease;
-}
-
-.movie-card img:hover {
-    transform: scale(1.05);
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
 }
 
 .movie-card p {
-    margin-top: 8px;
-    font-size: 0.9em;
+    margin: 0;
+    font-size: 1rem;
+    color: #fff;
 }
 
 /* Modal styles */
@@ -74,32 +83,54 @@ h2 {
 }
 
 .modal-content {
+    top: 0;
+    left: 40%;
     background-color: #1f1f1f;
     padding: 20px;
     border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
     text-align: center;
-    width: 300px;
+    position: relative;
+}
+
+.modal-content h3 {
+    margin: 10px 0;
+    color: #e50914;
+}
+
+.modal-content p {
+    margin: 10px 0;
+}
+
+.modal-content select {
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    margin: 10px 0;
+}
+
+.modal-content button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #e50914;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.modal-content button:hover {
+    background-color: #f40612;
 }
 
 .close {
     position: absolute;
     top: 10px;
-    right: 10px;
-    font-size: 1.5em;
-    cursor: pointer;
+    right: 15px;
     color: #fff;
-}
-
-button {
-    background-color: #e50914;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    margin-top: 15px;
-    border-radius: 5px;
+    font-size: 24px;
     cursor: pointer;
-}
-
-button:hover {
-    background-color: #f40612;
 }
