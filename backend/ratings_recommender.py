@@ -134,13 +134,34 @@ def predict():
             if not title.empty:
                 id_exists = any(obj[0]['id'] == movie_id for obj in top_recommendations)
                 if id_exists == False:
-                    print('new id', title.values[0])
                     json_obj = movie.to_dict(orient='records')
                     json_obj[0]['poster'] = poster.values[0]
                     top_recommendations.append(json_obj)
             
             # Stop once we have 5 valid recommendations
             if len(top_recommendations) == (2*num_recommendations):
+                break
+
+        top_cast = crew_df[crew_df['id'] == top_recommendations[0][0]['id']]['name']
+        top_cast = top_cast.values
+        for movie_id, predicted_rating in sorted_predictions:
+            # Retrieve title
+            movie = movies_df[movies_df['id'] == movie_id]
+            title = movies_df[movies_df['id'] == movie_id]['name']
+            poster = posters_df[posters_df['id'] == movie_id]['link']
+            cast = crew_df[crew_df['id'] == movie_id]['name']
+            cast = cast.values
+            # Check if the title exists and is not empty
+            if not title.empty:
+                if set(cast) & set(top_cast):
+                    id_exists = any(obj[0]['id'] == movie_id for obj in top_recommendations)
+                    if id_exists == False:
+                        json_obj = movie.to_dict(orient='records')
+                        json_obj[0]['poster'] = poster.values[0]
+                        top_recommendations.append(json_obj)
+            
+            # Stop once we have 5 valid recommendations
+            if len(top_recommendations) == (3*num_recommendations):
                 break
 
         return jsonify(top_recommendations)
