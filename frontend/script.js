@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
         similar: document.querySelector('.category:nth-child(1) .movie-list'),
         genre: document.querySelector('.category:nth-child(2) .movie-list'),
         cast: document.querySelector('.category:nth-child(3) .movie-list'),
-        keywords: document.querySelector('.category:nth-child(4) .movie-list'),
     };
     const username = localStorage.getItem('username')
     const selectedGenre = 'Comedy';
@@ -35,8 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     sections.genre.appendChild(card);
                 } else if (index < 30) {
                     sections.cast.appendChild(card);
-                } else {
-                    sections.keywords.appendChild(card);
                 }
             });
         })
@@ -74,7 +71,6 @@ function genreFilter(){
         similar: document.querySelector('.category:nth-child(1) .movie-list'),
         genre: document.querySelector('.category:nth-child(2) .movie-list'),
         cast: document.querySelector('.category:nth-child(3) .movie-list'),
-        keywords: document.querySelector('.category:nth-child(4) .movie-list'),
     };
 
     // Clear existing cards from all sections

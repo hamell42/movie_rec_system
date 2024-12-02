@@ -89,6 +89,7 @@ def predict():
     user_id = request.args.get('username', default='0', type=str)
     genre = request.args.get('genre', default='All', type=str)
     num_recommendations = 10
+    num_categories = 3
     top_recommendations = []
 
     if genre == 'All':
@@ -167,7 +168,7 @@ def predict():
 
             return jsonify(top_recommendations)
         else:
-            top_recommendations = movies_df.sample(n=(4*num_recommendations)).values.tolist()
+            top_recommendations = movies_df.sample(n=(num_categories*num_recommendations)).values.tolist()
             return jsonify(top_recommendations)
     else:
         if ratings_df.size > 0:
@@ -246,7 +247,7 @@ def predict():
 
             return jsonify(top_recommendations)
         else:
-            top_recommendations = movies_df.sample(n=(4*num_recommendations)).values.tolist()
+            top_recommendations = movies_df.sample(n=(num_categories*num_recommendations)).values.tolist()
             return jsonify(top_recommendations)
 
 @app.route('/api/genres', methods=['GET'])

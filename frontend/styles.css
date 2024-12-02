@@ -105,7 +105,7 @@ header h1 {
     margin: 10px 0;
 }
 
-.modal-content select {
+select {
     padding: 5px;
     border-radius: 5px;
     background-color: #333;
@@ -137,33 +137,11 @@ header h1 {
     cursor: pointer;
 }
 
-/* Dropdown container */
-.dropdown-container {
-    margin: 20px;
-    text-align: center;
-}
-
-/* Dropdown label */
-.dropdown-container label {
-    font-size: 1.2rem;
-    margin-right: 10px;
-    color: #fff;
-}
-
-/* Dropdown select styles */
-.dropdown-container select {
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    background-color: #333;
-    color: #fff;
-    font-size: 1rem;
-    cursor: pointer;
-    outline: none;
-    transition: background-color 0.3s ease;
-}
-
-.dropdown-container select:hover {
-    background-color: #444;
+/* Flexbox container for genre header */
+.genre-header {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    gap: 10px; /* Space between the <h2> and <select> */
+    margin-left: 10px; /* Match <h2>'s margin style */
 }
 
