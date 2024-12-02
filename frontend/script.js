@@ -7,17 +7,15 @@ document.addEventListener('DOMContentLoaded', () => {
         keywords: document.querySelector('.category:nth-child(4) .movie-list'),
     };
     const username = localStorage.getItem('username')
+    const selectedGenre = 'Comedy';
     // Fetch recommendations from the backend
-    fetch(`http://127.0.0.1:5000/api/recommendations?username=${encodeURIComponent(username)}`) // Replace with your API endpoint
+    fetch(`http://127.0.0.1:5000/api/recommendations?username=${encodeURIComponent(username)}&genre=${encodeURIComponent(selectedGenre)}`) // Replace with your API endpoint
         .then(response => response.json())
         .then(data => {
             console.log(data);
             // Process the data and update the HTML
             data.forEach((movie, index) => {
                 movie = movie[0]
-                console.log(index)
-                console.log(movie['date'])
-                genres = 'PLACE HOLDER'
                 
                 // Create a movie card
                 const card = document.createElement('div');
@@ -44,6 +42,74 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => console.error('Error fetching movie data:', error));
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const genreSelect = document.getElementById('movie-genres');
+
+    // Fetch genres from the Python backend
+    fetch('http://127.0.0.1:5000/api/genres')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(genres => {
+            // Populate the dropdown with fetched genres
+            genres.forEach(genre => {
+                const option = document.createElement('option');
+                option.value = genre; // Use lowercase for values
+                option.textContent = genre; // Display name in title case
+                genreSelect.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+});
+
+function genreFilter(){
+    // Selectors for each category section
+    const sections = {
+        similar: document.querySelector('.category:nth-child(1) .movie-list'),
+        genre: document.querySelector('.category:nth-child(2) .movie-list'),
+        cast: document.querySelector('.category:nth-child(3) .movie-list'),
+        keywords: document.querySelector('.category:nth-child(4) .movie-list'),
+    };
+
+    // Clear existing cards from all sections
+    sections.genre.innerHTML = '';
+
+    const username = localStorage.getItem('username')
+    const selectedGenre = document.getElementById('movie-genres').value;
+    // Fetch recommendations from the backend
+    fetch(`http://127.0.0.1:5000/api/recommendations?username=${encodeURIComponent(username)}&genre=${encodeURIComponent(selectedGenre)}`) // Replace with your API endpoint
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            // Process the data and update the HTML
+            data.forEach((movie, index) => {
+                movie = movie[0]
+                
+                // Create a movie card
+                const card = document.createElement('div');
+                card.className = 'movie-card';
+                card.onclick = () => showMovieDetails(movie);
+                // <p>⭐ ${movie['rating'].toFixed(1)} | ${genres.join(', ')}</p>
+                card.innerHTML = `
+                    <img src="${movie['poster'] || 'default-image.jpg'}" alt="${movie['name']}">
+                    <h1>${movie['name']}</h1>
+                    <p>⭐ ${movie['rating'].toFixed(1)}</p>
+                `;
+
+                // Distribute movies into categories
+                if (index < 20 && index >= 10) {
+                    sections.genre.appendChild(card);
+                }
+            });
+        })
+        .catch(error => console.error('Error fetching movie data:', error));
+}
 
 function showMovieDetails(movie) {
     // Fetch movie details from backend if needed (extend API if required)
@@ -83,7 +149,7 @@ function submitRating() {
     };
 
     // Send the data to the backend
-    fetch('http://127.0.0.1:5000/submit_rating', {
+    fetch('http://127.0.0.1:5000/api/submit_rating', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
