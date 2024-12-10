@@ -1,5 +1,5 @@
 # Movie Recommendation System
-This project is a movie recommendation system. The datset used is Kaggle.com's 'Lettboxd'
+This project is a movie recommendation system. The datset used is Kaggle.com's 'Letterboxd'
 
 # How to Run
 Download the dataset files from Kaggle.com and place them in the dataset folder
